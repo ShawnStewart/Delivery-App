@@ -5,8 +5,16 @@ class DispatchScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.setState = {};
+    this.setState = [{
+      address: '',
+      restaurant: ''
+    }];
+  };
+
+  GenerateDelivery = () => {
+
   }
+  
   render() {
     return (
       <Segment inverted>

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Menu } from "semantic-ui-react";
+import DispatchScreen from '../DispatchDashboard/DispatchScreen';
+import DriverList from '../DispatchDashboard/DriverList';
 
 export default class SideMenu extends Component {
   constructor(props) {
@@ -80,11 +82,17 @@ export default class SideMenu extends Component {
             </Menu.Item>
           </Menu>
         </Grid.Column>
-        <Grid.Column width={13}>
-          {this.state.activeMenuItem === "Register" ? (
-            <h1>I'm working</h1>
+        <Grid.Column width={10}>
+          {this.state.activeMenuItem === "Dispatcher Overview" ? (
+            <DispatchScreen />
           ) : null}
         </Grid.Column>
+        <Grid.Column width={3}>
+          {this.state.activeMenuItem === "Dispatcher Overview" ? (
+            <DriverList />
+          ) : null}
+        </Grid.Column>
+
       </Grid>
     );
   }
