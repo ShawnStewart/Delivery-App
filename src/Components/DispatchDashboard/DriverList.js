@@ -33,18 +33,20 @@ class DriverList extends Component {
   render() {
     const name = this.name;
     return (
-      <Segment>
+      <Segment inverted color="grey">
         <List divided relaxed>
           {this.state.drivers.map((driver, index) => {
             return (
-              <div
-                className={classnames("available", {
-                  unavailable: driver.unavailable
-                })}
-              >
+              <div>
                 <List.Item>
                   <List.Content>
-                    <List.Header>{driver.name}</List.Header>
+                    <List.Header
+                      className={classnames("available", {
+                        unavailable: driver.unavailable
+                      })}
+                    >
+                      {driver.name}
+                    </List.Header>
                     {driver.delivery ? driver.delivery : "Available"}
                   </List.Content>
                 </List.Item>

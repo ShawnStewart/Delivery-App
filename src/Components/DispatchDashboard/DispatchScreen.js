@@ -27,8 +27,8 @@ class DispatchScreen extends Component {
 
   render() {
     return (
-      <Segment inverted>
-        <List divided inverted relaxed>
+      <Segment inverted color="blue">
+        <List divided relaxed>
           {this.state.orders.map((order, index) => {
             return (
               <List.Item>
