@@ -3,18 +3,29 @@ import { Grid, Menu, Segment, GridColumn } from "semantic-ui-react";
 import DispatchScreen from "../DispatchDashboard/DispatchScreen";
 import DriverList from "../DispatchDashboard/DriverList";
 import CurrentDelivery from "../Driver/CurrentDelivery";
+import OrderNow from "../Customer/OrderNow";
+import RestaurantMenu from "../Customer/RestaurantMenu";
 
 export default class SideMenu extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      activeMenuItem: ""
+      activeMenuItem: "",
+      selectedRestaurant: ""
     };
   }
 
   handleMenuClick = (e, { name }) => {
     this.setState({ activeMenuItem: name });
+  };
+
+  handleOrderNowClick = name => {
+    this.setState({ selectedRestaurant: name });
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log("REST", this.state.selectedRestaurant);
   };
 
   render() {
@@ -37,9 +48,9 @@ export default class SideMenu extends Component {
                   active={this.state.activeMenuItem === "CustomerLogin"}
                 />
                 <Menu.Item
-                  name="Order Restaurants"
+                  name="Order Now"
                   onClick={this.handleMenuClick}
-                  active={this.state.activeMenuItem === "Order Restaurants"}
+                  active={this.state.activeMenuItem === "Order Now"}
                 />
                 <Menu.Item
                   name="Checkout Review"
@@ -101,6 +112,22 @@ export default class SideMenu extends Component {
         {this.state.activeMenuItem === "Current Delivery" ? (
           <Grid.Column width={13}>
             <CurrentDelivery />
+          </Grid.Column>
+        ) : null}
+
+        {this.state.activeMenuItem === "Order Now" &&
+        this.state.selectedRestaurant === "" ? (
+          <Grid.Column width={13}>
+            <OrderNow DisplayMenu={this.handleOrderNowClick} />
+          </Grid.Column>
+        ) : null}
+
+        {this.state.activeMenuItem === "Order Now" &&
+        this.state.selectedRestaurant !== "" ? (
+          <Grid.Column width={13}>
+            <RestaurantMenu
+              selectedRestaurant={this.state.selectedRestaurant}
+            />
           </Grid.Column>
         ) : null}
       </Grid>
