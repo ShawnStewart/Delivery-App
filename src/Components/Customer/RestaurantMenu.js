@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Segment, List, Grid, Button } from "semantic-ui-react";
+import { Segment, List, Grid, Button, Label } from "semantic-ui-react";
 import Cart from "./Cart";
 
 export default class RestaurantMenu extends Component {
@@ -62,7 +62,9 @@ export default class RestaurantMenu extends Component {
                   <List.Item key={index}>
                     <List.Content>
                       <List.Header>{item.name}</List.Header>
-                      {item.price}
+                      <Label color="teal" tag>
+                        {item.price}
+                      </Label>
 
                       <Button
                         floated="right"
