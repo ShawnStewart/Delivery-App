@@ -60,7 +60,7 @@ class OrderNow extends Component {
               {restaurant.name}
 
               <Button
-                className="ui right floated middle aligned content"
+                floated="right"
                 name={restaurant.name}
                 onClick={this.handleRestaurantClick}
                 content="Order Now!"

@@ -31,7 +31,7 @@ class DispatchScreen extends Component {
         <List divided relaxed>
           {this.state.orders.map((order, index) => {
             return (
-              <List.Item>
+              <List.Item key={index}>
                 <List.Content>
                   <List.Header>{order.address}</List.Header>
                   {order.restaurant}

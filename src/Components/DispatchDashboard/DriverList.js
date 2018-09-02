@@ -38,7 +38,7 @@ class DriverList extends Component {
           {this.state.drivers.map((driver, index) => {
             return (
               <div>
-                <List.Item>
+                <List.Item key={index}>
                   <List.Content>
                     <List.Header
                       className={classnames("available", {
