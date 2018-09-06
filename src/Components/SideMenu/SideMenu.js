@@ -8,6 +8,7 @@ import CurrentDelivery from "../Driver/CurrentDelivery";
 import OrderNow from "../Customer/OrderNow";
 import RestaurantMenu from "../Customer/RestaurantMenu";
 import Checkout from "../Customer/Checkout";
+import DriverDashboard from "../Driver/DriverDashboard";
 
 export default class SideMenu extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export default class SideMenu extends Component {
     return (
       <Grid>
         <Grid.Column width={3}>
-          <Menu fluid vertical inverted color="orange">
+          <Menu fluid vertical inverted size="massive" color="gray">
             <Menu.Item>
               <Menu.Header>Customer</Menu.Header>
               <Menu.Menu>
@@ -109,6 +110,12 @@ export default class SideMenu extends Component {
                 <DriverList />
               </Grid.Column>
             </Grid>
+          </Grid.Column>
+        ) : null}
+
+        {this.state.activeMenuItem === "Driver Dashboard" ? (
+          <Grid.Column width={13}>
+            <DriverDashboard />
           </Grid.Column>
         ) : null}
 
