@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Segment, List, Grid, Button, Label } from "semantic-ui-react";
+import { Segment, List, Grid, Button, Label, Icon } from "semantic-ui-react";
 import Cart from "./Cart";
 
 export default class RestaurantMenu extends Component {
@@ -55,7 +55,7 @@ export default class RestaurantMenu extends Component {
       <Segment>
         <h1>{this.props.selectedRestaurant}</h1>
         <Grid>
-          <Grid.Column width={12}>
+          <Grid.Column width={10}>
             <List divided>
               {this.state.MenuItems.map((item, index) => {
                 return (
@@ -67,19 +67,25 @@ export default class RestaurantMenu extends Component {
                       </Label>
 
                       <Button
+                        size="large"
+                        animated="vertical"
                         floated="right"
                         name={item.name}
                         price={item.price}
                         onClick={this.handleAddToCart}
-                        content="Add to cart"
-                      />
+                      >
+                        <Button.Content hidden>
+                          <Icon name="shop" />
+                        </Button.Content>
+                        <Button.Content visible>Add to cart</Button.Content>
+                      </Button>
                     </List.Content>
                   </List.Item>
                 );
               })}
             </List>
           </Grid.Column>
-          <Grid.Column width={4}>
+          <Grid.Column width={6}>
             <Cart items={this.state.items} />
           </Grid.Column>
         </Grid>

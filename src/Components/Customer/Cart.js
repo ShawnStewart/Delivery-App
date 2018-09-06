@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Segment, List, SegmentGroup } from "semantic-ui-react";
+import { Segment, List, Button, Icon } from "semantic-ui-react";
+import update from "react-addons-update";
 
 export default class Cart extends Component {
   constructor(props) {
@@ -18,23 +19,11 @@ export default class Cart extends Component {
     this.setState({ total: parseFloat(total).toFixed(2) });
   };
 
-  // CalculateTax = total => {
-  //   let tax = parseFloat(total) * 0.0469;
-  //   this.setState({ tax: parseFloat(tax).toFixed(2) });
+  // updateQuantity = (e, { quantity, key }) => {
+  //   let newQuant = this.props.items.quantity + 1;
+  //   this.props.setState({ quantity: newQuant });
   // };
 
-  // CalculateSubtotal = (tax, total) => {
-  //   let subtotal = tax + total;
-  //   this.setState({ subtotal });
-  // };
-
-  // componentWillReceiveProps = nextProps => {
-  //   if (this.props.items !== nextProps.items) {
-  //     this.CalculateTotal();
-  //     // this.CalculateTax(this.state.total);
-  //     // this.CalculateSubtotal(this.state.tax, this.state.total);
-  //   }
-  // };
   componentDidUpdate = (prevProps, prevState) => {
     if (this.props !== prevProps) {
       this.CalculateTotal();
@@ -52,6 +41,24 @@ export default class Cart extends Component {
                 <List.Content>
                   <List.Header>{item.name}</List.Header>
                   {item.price}
+                  <Segment floated="right">
+                    <Button
+                      circular
+                      size="mini"
+                      onClick={this.AddQuantityOnClick}
+                    >
+                      -
+                    </Button>
+                    1
+                    <Button
+                      circular
+                      size="mini"
+                      key={index}
+                      onClick={this.updateQuantity}
+                    >
+                      +
+                    </Button>
+                  </Segment>
                 </List.Content>
               </List.Item>
             );
@@ -62,3 +69,21 @@ export default class Cart extends Component {
     );
   }
 }
+
+// CalculateTax = total => {
+//   let tax = parseFloat(total) * 0.0469;
+//   this.setState({ tax: parseFloat(tax).toFixed(2) });
+// };
+
+// CalculateSubtotal = (tax, total) => {
+//   let subtotal = tax + total;
+//   this.setState({ subtotal });
+// };
+
+// componentWillReceiveProps = nextProps => {
+//   if (this.props.items !== nextProps.items) {
+//     this.CalculateTotal();
+//     // this.CalculateTax(this.state.total);
+//     // this.CalculateSubtotal(this.state.tax, this.state.total);
+//   }
+// };

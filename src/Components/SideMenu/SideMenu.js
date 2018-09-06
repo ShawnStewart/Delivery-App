@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { Grid, Menu, Segment, GridColumn } from "semantic-ui-react";
+
+// UI components
 import DispatchScreen from "../DispatchDashboard/DispatchScreen";
 import DriverList from "../DispatchDashboard/DriverList";
 import CurrentDelivery from "../Driver/CurrentDelivery";
 import OrderNow from "../Customer/OrderNow";
 import RestaurantMenu from "../Customer/RestaurantMenu";
+import Checkout from "../Customer/Checkout";
 
 export default class SideMenu extends Component {
   constructor(props) {
@@ -53,9 +56,9 @@ export default class SideMenu extends Component {
                   active={this.state.activeMenuItem === "Order Now"}
                 />
                 <Menu.Item
-                  name="Checkout Review"
+                  name="Checkout"
                   onClick={this.handleMenuClick}
-                  active={this.state.activeMenuItem === "Checkout Review"}
+                  active={this.state.activeMenuItem === "Checkout"}
                 />
               </Menu.Menu>
             </Menu.Item>
@@ -128,6 +131,12 @@ export default class SideMenu extends Component {
             <RestaurantMenu
               selectedRestaurant={this.state.selectedRestaurant}
             />
+          </Grid.Column>
+        ) : null}
+
+        {this.state.activeMenuItem === "Checkout" ? (
+          <Grid.Column width={13}>
+            <Checkout selectedRestaurant={this.state.selectedRestaurant} />
           </Grid.Column>
         ) : null}
       </Grid>
