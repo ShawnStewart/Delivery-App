@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { Grid, Menu, Segment, GridColumn } from "semantic-ui-react";
 
 // UI components
-import DispatchScreen from "../DispatchDashboard/DispatchScreen";
-import DriverList from "../DispatchDashboard/DriverList";
+import DispatchOverview from "../DispatchDashboard/DispatchOverview";
 import CurrentDelivery from "../Driver/CurrentDelivery";
 import OrderNow from "../Customer/OrderNow";
 import RestaurantMenu from "../Customer/RestaurantMenu";
 import Checkout from "../Customer/Checkout";
+import DriverDashboard from "../Driver/DriverDashboard";
 
 export default class SideMenu extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ export default class SideMenu extends Component {
     return (
       <Grid>
         <Grid.Column width={3}>
-          <Menu fluid vertical inverted color="orange">
+          <Menu fluid vertical inverted size="massive" color="black">
             <Menu.Item>
               <Menu.Header>Customer</Menu.Header>
               <Menu.Menu>
@@ -100,15 +100,13 @@ export default class SideMenu extends Component {
 
         {this.state.activeMenuItem === "Dispatcher Overview" ? (
           <Grid.Column width={13}>
-            <Grid>
-              <Grid.Column width={12}>
-                <DispatchScreen />
-              </Grid.Column>
+            <DispatchOverview />
+          </Grid.Column>
+        ) : null}
 
-              <Grid.Column width={4}>
-                <DriverList />
-              </Grid.Column>
-            </Grid>
+        {this.state.activeMenuItem === "Driver Dashboard" ? (
+          <Grid.Column width={13}>
+            <DriverDashboard />
           </Grid.Column>
         ) : null}
 
