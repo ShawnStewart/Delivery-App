@@ -8,7 +8,6 @@ import {
   Input,
   Label
 } from "semantic-ui-react";
-import "./Driver.css";
 export default class DriverDashboard extends Component {
   constructor(props) {
     super(props);
@@ -35,7 +34,7 @@ export default class DriverDashboard extends Component {
           color="blue"
           inverted
         >
-          <Icon cirular className="black" name="user circle" size="massive" c />
+          <Icon className="black" name="user circle" size="massive" />
         </Segment>
         <Segment.Group>
           <Segment padded className="ui center aligned grid">

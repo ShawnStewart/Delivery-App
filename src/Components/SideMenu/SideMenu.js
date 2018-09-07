@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Grid, Menu, Segment, GridColumn } from "semantic-ui-react";
 
 // UI components
-import DispatchScreen from "../DispatchDashboard/DispatchScreen";
-import DriverList from "../DispatchDashboard/DriverList";
+import DispatchOverview from "../DispatchDashboard/DispatchOverview";
 import CurrentDelivery from "../Driver/CurrentDelivery";
 import OrderNow from "../Customer/OrderNow";
 import RestaurantMenu from "../Customer/RestaurantMenu";
@@ -36,7 +35,7 @@ export default class SideMenu extends Component {
     return (
       <Grid>
         <Grid.Column width={3}>
-          <Menu fluid vertical inverted size="massive" color="gray">
+          <Menu fluid vertical inverted size="massive" color="black">
             <Menu.Item>
               <Menu.Header>Customer</Menu.Header>
               <Menu.Menu>
@@ -101,15 +100,7 @@ export default class SideMenu extends Component {
 
         {this.state.activeMenuItem === "Dispatcher Overview" ? (
           <Grid.Column width={13}>
-            <Grid>
-              <Grid.Column width={12}>
-                <DispatchScreen />
-              </Grid.Column>
-
-              <Grid.Column width={4}>
-                <DriverList />
-              </Grid.Column>
-            </Grid>
+            <DispatchOverview />
           </Grid.Column>
         ) : null}
 

@@ -6,7 +6,8 @@ import {
   Radio,
   Input,
   Button,
-  Container
+  Container,
+  Icon
 } from "semantic-ui-react";
 
 export default class Checkout extends Component {
@@ -84,12 +85,23 @@ export default class Checkout extends Component {
   render() {
     return (
       <Grid>
+        {/* cart and total */}
         <Grid.Column width={10}>
-          <Segment.Group>
-            <Segment>
-              <h1 className="ui center aligned grid">Restaurant Name</h1>
-            </Segment>
-            <Segment>
+          <Segment>
+            <Segment.Group>
+              <Segment inverted padded color="blue">
+                <h1 className="ui center aligned grid">Restaurant Name</h1>
+              </Segment>
+              <Segment
+                className="ui center aligned grid"
+                color="blue"
+                padded
+                inverted
+              >
+                <Icon circular className="black" name="food" size="huge" />
+              </Segment>
+            </Segment.Group>
+            <Segment color="black">
               <List divided relaxed>
                 {this.state.cartItems.map((item, index) => {
                   let total = null;
@@ -106,62 +118,85 @@ export default class Checkout extends Component {
               </List>
             </Segment>
             <Segment.Group>
-              <Segment>Subtotal: ${this.state.subtotal}</Segment>
+              <Segment color="black">Subtotal: ${this.state.subtotal}</Segment>
               <Segment>Tax: ${this.state.tax} </Segment>
               <Segment>
                 Tip:
                 <Button content="10%" value="0.1" onClick={this.handleTip} />
                 <Button content="15%" value="0.15" onClick={this.handleTip} />
                 <Button content="20%" value="0.2" onClick={this.handleTip} />
-                <div floated="right">${this.state.tip}</div>
+                <Container textAlign="right">${this.state.tip}</Container>
               </Segment>
-              <Segment>Total: {this.state.total} </Segment>
             </Segment.Group>
-          </Segment.Group>
+            <Segment color="black">
+              Total:
+              {this.state.total}
+            </Segment>
+          </Segment>
         </Grid.Column>
+
+        {/*review customer info  */}
         <Grid.Column width={6}>
           <Segment.Group>
-            <Segment>
-              <h1 className="ui center aligned grid">
+            <Segment inverted padded="very" color="blue">
+              <h2 className="ui center aligned grid">
                 Review Customer Information
-              </h1>
+              </h2>
             </Segment>
-            <Segment>Restaurant Name</Segment>
-            <Segment>
-              Delivery Address:
-              <br /> 1701 Lois ave apt 7<br />
-              Tampa, Florida, 32104
-              <br />
+            <Segment color="black">
+              <Segment padded color="black">
+                Restaurant Name
+              </Segment>
+              <Segment padded color="black">
+                Delivery Address:
+                <br /> 1701 Lois ave apt 7<br />
+                Tampa, Florida, 32104
+                <br />
+                <Button
+                  icon="cog"
+                  color="blue"
+                  content="Change delivery address"
+                />
+              </Segment>
+              <Segment padded color="black">
+                Order Time: {this.state.value}
+                <br />
+                <Radio
+                  label="Now"
+                  name="radioGroup"
+                  value="Now"
+                  checked={this.state.value === "Now"}
+                  onChange={this.handleTime}
+                />
+                <Radio
+                  label="Later"
+                  name="radioGroup"
+                  value="Later"
+                  checked={this.state.value === "Later"}
+                  onChange={this.handleTime}
+                />
+                {this.state.value === "Later" ? (
+                  <Input placeholder="Enter a time" />
+                ) : null}
+              </Segment>
+              <Segment padded color="black">
+                Payment option: <br />
+                XXXX-XXXX-XXXX-0897
+                <br />
+                <Button
+                  icon="cog"
+                  color="blue"
+                  content="Change payment option"
+                />
+              </Segment>
             </Segment>
             <Segment>
-              Order Time: {this.state.value}
-              <br />
-              <Radio
-                label="Now"
-                name="radioGroup"
-                value="Now"
-                checked={this.state.value === "Now"}
-                onChange={this.handleTime}
-              />
-              <Radio
-                label="Later"
-                name="radioGroup"
-                value="Later"
-                checked={this.state.value === "Later"}
-                onChange={this.handleTime}
-              />
-              {this.state.value === "Later" ? (
-                <Input placeholder="Enter a time" />
-              ) : null}
-            </Segment>
-            <Segment>
-              Payment option: <br />
-              XXXX-XXXX-XXXX-0897
-              <br />
-              <Button content="Change payment option" />
-            </Segment>
-            <Segment>
-              <Button content="Place Order" />
+              <Button animated="vertical" color="green">
+                <Button.Content hidden>
+                  <Icon name="shop" />
+                </Button.Content>
+                <Button.Content visible>Place order</Button.Content>
+              </Button>
             </Segment>
           </Segment.Group>
         </Grid.Column>

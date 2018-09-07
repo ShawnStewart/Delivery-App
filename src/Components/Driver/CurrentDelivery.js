@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Segment, Button, Modal, Icon } from "semantic-ui-react";
-import "./Driver.css";
 
 export default class CurrentDelivery extends Component {
   constructor(props) {
@@ -26,7 +25,7 @@ export default class CurrentDelivery extends Component {
           color="blue"
           inverted
         >
-          <Icon cirular className="black" name="car circular" size="huge" c />
+          <Icon circular className="black" name="car" size="huge" />
         </Segment>
         <br />
         <Segment.Group padded>
@@ -61,7 +60,7 @@ export default class CurrentDelivery extends Component {
               <Modal.Description>
                 <p>
                   Are you sure you want to drop this delivery? Dropping too many
-                  deliveries can reflected poorly on your driver review!
+                  deliveries can reflect poorly on your driver review!
                 </p>
               </Modal.Description>
               <br />
