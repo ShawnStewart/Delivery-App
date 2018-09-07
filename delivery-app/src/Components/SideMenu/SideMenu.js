@@ -1,13 +1,21 @@
 import React, { Component } from "react";
-import { Grid, Menu } from "semantic-ui-react";
-import DispatchScreen from "../DispatchDashboard/DispatchScreen";
+import { Grid, Menu, Segment, GridColumn } from "semantic-ui-react";
+
+// UI components
+import DispatchOverview from "../DispatchDashboard/DispatchOverview";
+import CurrentDelivery from "../Driver/CurrentDelivery";
+import OrderNow from "../Customer/OrderNow";
+import RestaurantMenu from "../Customer/RestaurantMenu";
+import Checkout from "../Customer/Checkout";
+import DriverDashboard from "../Driver/DriverDashboard";
 
 export default class SideMenu extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      activeMenuItem: ""
+      activeMenuItem: "",
+      selectedRestaurant: ""
     };
   }
 
@@ -15,11 +23,19 @@ export default class SideMenu extends Component {
     this.setState({ activeMenuItem: name });
   };
 
+  handleOrderNowClick = name => {
+    this.setState({ selectedRestaurant: name });
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log("REST", this.state.selectedRestaurant);
+  };
+
   render() {
     return (
       <Grid>
         <Grid.Column width={3}>
-          <Menu fluid vertical inverted color="orange">
+          <Menu fluid vertical inverted size="massive" color="black">
             <Menu.Item>
               <Menu.Header>Customer</Menu.Header>
               <Menu.Menu>
@@ -35,14 +51,14 @@ export default class SideMenu extends Component {
                   active={this.state.activeMenuItem === "CustomerLogin"}
                 />
                 <Menu.Item
-                  name="Order Restaurants"
+                  name="Order Now"
                   onClick={this.handleMenuClick}
-                  active={this.state.activeMenuItem === "Order Restaurants"}
+                  active={this.state.activeMenuItem === "Order Now"}
                 />
                 <Menu.Item
-                  name="Checkout Review"
+                  name="Checkout"
                   onClick={this.handleMenuClick}
-                  active={this.state.activeMenuItem === "Checkout Review"}
+                  active={this.state.activeMenuItem === "Checkout"}
                 />
               </Menu.Menu>
             </Menu.Item>
@@ -81,11 +97,46 @@ export default class SideMenu extends Component {
             </Menu.Item>
           </Menu>
         </Grid.Column>
-        <Grid.Column width={13}>
-          {this.state.activeMenuItem === "Dispatcher Overview" ? (
-            <DispatchScreen />
-          ) : null}
-        </Grid.Column>
+
+        {this.state.activeMenuItem === "Dispatcher Overview" ? (
+          <Grid.Column width={13}>
+            <DispatchOverview />
+          </Grid.Column>
+        ) : null}
+
+        {this.state.activeMenuItem === "Driver Dashboard" ? (
+          <Grid.Column width={13}>
+            <DriverDashboard />
+          </Grid.Column>
+        ) : null}
+
+        {this.state.activeMenuItem === "Current Delivery" ? (
+          <Grid.Column width={13}>
+            <CurrentDelivery />
+          </Grid.Column>
+        ) : null}
+
+        {this.state.activeMenuItem === "Order Now" &&
+        this.state.selectedRestaurant === "" ? (
+          <Grid.Column width={13}>
+            <OrderNow DisplayMenu={this.handleOrderNowClick} />
+          </Grid.Column>
+        ) : null}
+
+        {this.state.activeMenuItem === "Order Now" &&
+        this.state.selectedRestaurant !== "" ? (
+          <Grid.Column width={13}>
+            <RestaurantMenu
+              selectedRestaurant={this.state.selectedRestaurant}
+            />
+          </Grid.Column>
+        ) : null}
+
+        {this.state.activeMenuItem === "Checkout" ? (
+          <Grid.Column width={13}>
+            <Checkout selectedRestaurant={this.state.selectedRestaurant} />
+          </Grid.Column>
+        ) : null}
       </Grid>
     );
   }
