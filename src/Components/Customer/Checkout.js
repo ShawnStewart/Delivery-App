@@ -54,7 +54,7 @@ export default class Checkout extends Component {
       value: null //Time to place order
     };
   }
-
+  // totals
   CalculateTotals = () => {
     let subtotal = 0;
     let tax = 0;
