@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
-
+//Customer
 const CustomerSchema = new Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
