@@ -8,6 +8,7 @@ import OrderNow from "../Customer/OrderNow";
 import RestaurantMenu from "../Customer/RestaurantMenu";
 import Checkout from "../Customer/Checkout";
 import DriverDashboard from "../Driver/DriverDashboard";
+import Register from "../Customer/Register";
 
 export default class SideMenu extends Component {
   constructor(props) {
@@ -135,6 +136,12 @@ export default class SideMenu extends Component {
         {this.state.activeMenuItem === "Checkout" ? (
           <Grid.Column width={13}>
             <Checkout selectedRestaurant={this.state.selectedRestaurant} />
+          </Grid.Column>
+        ) : null}
+
+        {this.state.activeMenuItem === "Register" ? (
+          <Grid.Column width={13}>
+            <Register />
           </Grid.Column>
         ) : null}
       </Grid>
