@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./backend/server.js",
-    "server": "nodemon ./backend/server.js"
+    "server": "nodemon ./backend/server.js",
+    "delivery-app": "npm start --prefix delivery-app",
+    "app": "concurrently \"npm run server\" \"npm run delivery-app\""
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
   "homepage": "https://github.com/ShawnStewart/Delivery-App#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "concurrently": "^4.0.1",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
