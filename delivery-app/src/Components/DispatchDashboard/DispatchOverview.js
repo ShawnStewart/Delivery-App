@@ -90,6 +90,7 @@ export default class DispatchOverview extends Component {
 
         {/* Driver List */}
         <Grid.Column width={6}>
+        <Segment>
           <Segment.Group>
             <Segment inverted padded color="blue">
               <h1 className="ui center aligned grid">Driver List</h1>
@@ -102,7 +103,8 @@ export default class DispatchOverview extends Component {
             >
               <Icon circular className="black" name="car" size="huge" />
             </Segment>
-            <Segment.Group>
+            
+          </Segment.Group>
               <Segment color="black">
                 <List divided relaxed>
                   {this.state.drivers.map((driver, index) => {
@@ -123,8 +125,7 @@ export default class DispatchOverview extends Component {
                   })}
                 </List>
               </Segment>
-            </Segment.Group>
-          </Segment.Group>
+          </Segment>
         </Grid.Column>
       </Grid>
     );

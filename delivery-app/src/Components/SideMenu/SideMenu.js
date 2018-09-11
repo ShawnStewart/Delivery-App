@@ -9,6 +9,7 @@ import RestaurantMenu from "../Customer/RestaurantMenu";
 import Checkout from "../Customer/Checkout";
 import DriverDashboard from "../Driver/DriverDashboard";
 import Register from "../Customer/Register";
+import Login from '../Customer/Login';
 
 export default class SideMenu extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ export default class SideMenu extends Component {
 
   handleMenuClick = (e, { name }) => {
     this.setState({ activeMenuItem: name });
+    console.log('selectedl', this.state.activeMenuItem);
   };
 
   handleOrderNowClick = name => {
@@ -46,10 +48,10 @@ export default class SideMenu extends Component {
                   active={this.state.activeMenuItem === "Register"}
                 />
                 <Menu.Item
-                  name="CustomerLogin"
+                  name="Customer Login"
                   content="Login"
                   onClick={this.handleMenuClick}
-                  active={this.state.activeMenuItem === "CustomerLogin"}
+                  active={this.state.activeMenuItem === "Customer Login"}
                 />
                 <Menu.Item
                   name="Order Now"
@@ -68,10 +70,10 @@ export default class SideMenu extends Component {
               <Menu.Header>Driver</Menu.Header>
               <Menu.Menu>
                 <Menu.Item
-                  name="DriverLogin"
+                  name="Driver Login"
                   content="Login"
                   onClick={this.handleMenuClick}
-                  active={this.state.activeMenuItem === "DriverLogin"}
+                  active={this.state.activeMenuItem === "Driver Login"}
                 />
                 <Menu.Item
                   name="Driver Dashboard"
@@ -144,7 +146,21 @@ export default class SideMenu extends Component {
             <Register />
           </Grid.Column>
         ) : null}
+
+        {this.state.activeMenuItem === "Customer Login" ? (
+          <Grid.Column width={13}>
+            <Login />
+          </Grid.Column>
+        ) : null}
+
+        {this.state.activeMenuItem === "Driver Login" ? (
+          <Grid.Column width={13}>
+            <Login />
+          </Grid.Column>
+        ) : null}
       </Grid>
+
+      
     );
   }
 }
