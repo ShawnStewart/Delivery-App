@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 // import routes
+const customerRoutes = require("./routes/api/customerRoutes");
 
 // middleware
 const app = express();
@@ -20,6 +21,7 @@ mongoose
   .catch(err => console.log(err));
 
 // connect routes
+app.use("/api/customers/", customerRoutes);
 
 const port = process.env.PORT || 4000;
 
