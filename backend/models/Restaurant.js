@@ -7,9 +7,12 @@ const RestaurantSchema = new Schema({
     type: String,
     required: true
   },
-  location: {
-    type: String,
-    required: true
+  address: {
+    street: String,
+    unit: String,
+    city: String,
+    state: String,
+    zip: Number
   },
   minimum: {
     type: Number,
