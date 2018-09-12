@@ -55,10 +55,9 @@ router.post("/register", (req, res) => {
 // @access  Private
 router.post("/login", (req, res) => {
   const { errors, isValid } = validateLogin(req.body);
+
   // Check Validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
+  if (!isValid) return res.status(400).json(errors);
 
   const { password, email } = req.body;
 
@@ -76,6 +75,7 @@ router.post("/login", (req, res) => {
         if (isMatch) {
           // User matched
           const payload = {
+            type: 1,
             id: user._id,
             firstname: user.firstname,
             lastname: user.lastname

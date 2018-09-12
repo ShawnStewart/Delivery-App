@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 // import routes
+const adminRoutes = require("./routes/api/adminRoutes");
 const customerRoutes = require("./routes/api/customerRoutes");
 const driverRoutes = require("./routes/api/driverRoutes");
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // connect to MongoDB
 const db = process.env.MONGO_URI;
+mongoose.set("useCreateIndex", true);
 mongoose
   .connect(
     db,
@@ -22,6 +24,7 @@ mongoose
   .catch(err => console.log(err));
 
 // connect routes
+app.use("/api/admins/", adminRoutes);
 app.use("/api/customers/", customerRoutes);
 app.use("/api/drivers/", driverRoutes);
 
