@@ -6,6 +6,7 @@ module.exports = function validateRegisterInput(data) {
 
   data.username = !checkEmpty(data.username) ? data.username : "";
   data.password = !checkEmpty(data.password) ? data.password : "";
+  data.password2 = !checkEmpty(data.password2) ? data.password2 : "";
 
   // username
   if (Validator.isEmpty(data.username)) {
@@ -23,4 +24,13 @@ module.exports = function validateRegisterInput(data) {
   } else if (!Validator.isLength(data.password, { min: 6 })) {
     errors.password = "Password must be at least 6 characters";
   }
+
+  // password confirmation
+  if (Validator.isEmpty(data.password2)) {
+    errors.password2 = "Please confirm password";
+  } else if (!Validator.equals(data.password, data.password2)) {
+    errors.password2 = "Passwords must match";
+  }
+
+  return { errors, isValid: checkEmpty(errors) };
 };
