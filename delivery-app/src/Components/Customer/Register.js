@@ -106,21 +106,6 @@ export default class Register extends Component {
                     onChange={this.onChange}
                   />
                 </Segment>
-                <Segment>
-                  <Label
-                    horizontal
-                    color="blue"
-                    size="large"
-                    content="Birthday"
-                  />
-                  <Form.Input
-                    type="date"
-                    placeholder="Birthday..."
-                    name="birthday"
-                    value={this.state.birthday}
-                    onChange={this.onChange}
-                  />
-                </Segment>
               </Grid.Column>
               <Grid.Column width={8}>
                 <Segment color="black">
