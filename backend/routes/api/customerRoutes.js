@@ -8,6 +8,7 @@ const Customer = require("../../models/Customer");
 
 // validation
 const validateRegistration = require("../../validation/customer/registration");
+const validateLogin = require("../../validation/login");
 
 // @route   POST api/customers/register
 // @desc    Registers new customer
@@ -47,6 +48,52 @@ router.post("/register", (req, res) => {
       });
     })
     .catch(err => console.log(err));
+});
+
+// @route   GET api/customer/login
+// @desc    login customer / Return JWT Token
+// @access  Private
+router.post("/login", (req, res) => {
+  const { errors, isValid } = validateLogin(req.body);
+  // Check Validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  const email = req.body.email;
+  const password = req.body.password;
+
+  // Find user by email
+  Customer.findOne({ email }).then(user => {
+    // Check for user
+    if (!user) {
+      errors.email = "User not found";
+      return res.status(404).json(errors);
+    }
+
+    // Check Password
+    bcrypt.compare(password, user.password).then(isMatch => {
+      if (isMatch) {
+        // User matched
+        const payload = { id: user.id, name: user.name }; // Create JWT payload
+
+        // Sign Token
+        jwt.sign(
+          payload,
+          process.env.ACCESS_KEY,
+          { expiresIn: 3600 },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
+          }
+        );
+      } else {
+        errors.password = "Password incorrect";
+        return res.status(400).json(errors);
+      }
+    });
+  });
 });
 
 module.exports = router;

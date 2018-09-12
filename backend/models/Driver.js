@@ -19,6 +19,10 @@ const DriverSchema = new Schema({
     type: String,
     required: true
   },
+  phone: {
+    type: Number,
+    required: true
+  },
   vehicle: {
     year: {
       type: Number,
