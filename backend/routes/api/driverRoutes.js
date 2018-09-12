@@ -4,16 +4,17 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 // models
-const driver = require("../../models/Driver");
+const Driver = require("../../models/Driver");
 
 // validation
 const validateRegistration = require("../../validation/driver/registration");
+const validateLogin = require("../../validation/login");
 
 // @route   POST api/drivers/register
 // @desc    Registers new driver
 // @access  Public
 router.post("/register", (req, res) => {
-  const { errors, isValid } = validateRegistration(req.body);
+  const { errors, isValid } = validateLogin(req.body);
 
   // validation check
   if (!isValid) return res.status(400).json(errors);
@@ -42,9 +43,11 @@ router.post("/register", (req, res) => {
         email,
         password,
         phone,
-        year,
-        make,
-        model
+        vehicle: {
+          year,
+          make,
+          model
+        }
       });
 
       bcrypt.genSalt(11, (err, salt) => {
