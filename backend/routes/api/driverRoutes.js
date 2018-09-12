@@ -14,8 +14,8 @@ const validateLogin = require("../../validation/login");
 // @desc    Registers new driver
 // @access  Public
 router.post("/register", (req, res) => {
-  const { errors, isValid } = validateLogin(req.body);
-
+  const { errors, isValid } = validateRegistration(req.body);
+  console.log(isValid);
   // validation check
   if (!isValid) return res.status(400).json(errors);
 
@@ -25,6 +25,7 @@ router.post("/register", (req, res) => {
     email,
     password,
     phone,
+    birthday,
     year,
     make,
     model
@@ -43,6 +44,7 @@ router.post("/register", (req, res) => {
         email,
         password,
         phone,
+        birthday,
         vehicle: {
           year,
           make,

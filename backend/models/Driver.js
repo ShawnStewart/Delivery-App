@@ -23,6 +23,10 @@ const DriverSchema = new Schema({
     type: Number,
     required: true
   },
+  birthday: {
+    type: Date,
+    required: true
+  },
   vehicle: {
     year: {
       type: Number,

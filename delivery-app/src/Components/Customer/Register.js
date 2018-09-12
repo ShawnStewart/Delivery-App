@@ -37,8 +37,11 @@ export default class Register extends Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log("state", this.state);
   }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log("state", this.state);
+  };
 
   render() {
     return (
