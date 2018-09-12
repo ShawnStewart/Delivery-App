@@ -15,7 +15,6 @@ const validateLogin = require("../../validation/login");
 // @access  Public
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegistration(req.body);
-  console.log(isValid);
   // validation check
   if (!isValid) return res.status(400).json(errors);
 
@@ -63,7 +62,7 @@ router.post("/register", (req, res) => {
         });
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => res.status(404).json({ message: err }));
 });
 
 // @route   GET api/driver/login
@@ -79,37 +78,45 @@ router.post("/login", (req, res) => {
   const password = req.body.password;
 
   // Find user by email
-  Driver.findOne({ email }).then(user => {
-    // Check for user
-    if (!user) {
-      errors.email = "User not found";
-      return res.status(404).json(errors);
-    }
-
-    // Check Password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        // User matched
-        const payload = { id: user.id, name: user.name }; // Create JWT payload
-
-        // Sign Token
-        jwt.sign(
-          payload,
-          process.env.ACCESS_KEY,
-          { expiresIn: 3600 },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            });
-          }
-        );
-      } else {
-        errors.password = "Password incorrect";
+  Driver.findOne({ email })
+    .then(user => {
+      // Check for user
+      if (!user) {
+        errors.email = "Invalid Credentials";
         return res.status(400).json(errors);
       }
-    });
-  });
+
+      // Check Password
+      bcrypt
+        .compare(password, user.password)
+        .then(isMatch => {
+          if (isMatch) {
+            const payload = {
+              id: user.id,
+              firstname: user.firstname,
+              lastname: user.lastname
+            };
+
+            // Sign Token
+            jwt.sign(
+              payload,
+              process.env.ACCESS_KEY,
+              { expiresIn: "1h" },
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: "Bearer " + token
+                });
+              }
+            );
+          } else {
+            errors.email = "Invalid Credentials";
+            return res.status(400).json(errors);
+          }
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err => res.status(404).json({ message: err }));
 });
 
 module.exports = router;
