@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Segment, Icon, Button, Grid, Label, Form } from "semantic-ui-react";
+import { registerCustomer } from "../../Actions/AuthActions";
+
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -21,23 +23,25 @@ export default class Register extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const newUser = {
+    const newCustomer = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       phone: this.state.phone,
       email: this.state.email,
-      birthday: this.state.birthday,
       password: this.state.password,
       password2: this.state.password2
     };
 
-    this.props.registerUser(newUser, this.props.history);
+    // this.props.registerCustomer(newCustomer, this.props.history);
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-    console.log("state", this.state);
   }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    console.log("state", this.state);
+  };
 
   render() {
     return (
