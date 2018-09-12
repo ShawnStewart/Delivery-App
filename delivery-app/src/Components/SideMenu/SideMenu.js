@@ -8,8 +8,9 @@ import OrderNow from "../Customer/OrderNow";
 import RestaurantMenu from "../Customer/RestaurantMenu";
 import Checkout from "../Customer/Checkout";
 import DriverDashboard from "../Driver/DriverDashboard";
-import Register from "../Customer/Register";
-import Login from '../Customer/Login';
+import CustomerRegister from "../Customer/Register";
+import DriverRegister from "../Driver/Register";
+import Login from "../Customer/Login";
 
 export default class SideMenu extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ export default class SideMenu extends Component {
 
   handleMenuClick = (e, { name }) => {
     this.setState({ activeMenuItem: name });
-    console.log('selectedl', this.state.activeMenuItem);
+    console.log("selectedl", this.state.activeMenuItem);
   };
 
   handleOrderNowClick = name => {
@@ -43,9 +44,10 @@ export default class SideMenu extends Component {
               <Menu.Header>Customer</Menu.Header>
               <Menu.Menu>
                 <Menu.Item
-                  name="Register"
+                  name="Customer Register"
+                  content="Register"
                   onClick={this.handleMenuClick}
-                  active={this.state.activeMenuItem === "Register"}
+                  active={this.state.activeMenuItem === "Customer Register"}
                 />
                 <Menu.Item
                   name="Customer Login"
@@ -69,6 +71,12 @@ export default class SideMenu extends Component {
             <Menu.Item>
               <Menu.Header>Driver</Menu.Header>
               <Menu.Menu>
+                <Menu.Item
+                  name="Driver Register"
+                  content="Register"
+                  onClick={this.handleMenuClick}
+                  active={this.state.activeMenuItem === "Driver Register"}
+                />
                 <Menu.Item
                   name="Driver Login"
                   content="Login"
@@ -141,26 +149,25 @@ export default class SideMenu extends Component {
           </Grid.Column>
         ) : null}
 
-        {this.state.activeMenuItem === "Register" ? (
+        {this.state.activeMenuItem === "Customer Register" ? (
           <Grid.Column width={13}>
-            <Register />
+            <CustomerRegister />
           </Grid.Column>
         ) : null}
 
-        {this.state.activeMenuItem === "Customer Login" ? (
+        {this.state.activeMenuItem === "Customer Login" ||
+        this.state.activeMenuItem === "Driver Login" ? (
           <Grid.Column width={13}>
             <Login />
           </Grid.Column>
         ) : null}
 
-        {this.state.activeMenuItem === "Driver Login" ? (
+        {this.state.activeMenuItem === "Driver Register" ? (
           <Grid.Column width={13}>
-            <Login />
+            <DriverRegister />
           </Grid.Column>
         ) : null}
       </Grid>
-
-      
     );
   }
 }
