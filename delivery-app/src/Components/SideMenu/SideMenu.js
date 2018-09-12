@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Menu, Segment, GridColumn } from "semantic-ui-react";
+import checkEmpty from "./checkEmpty";
 
 // UI components
 import DispatchOverview from "../DispatchDashboard/DispatchOverview";
@@ -11,6 +12,7 @@ import DriverDashboard from "../Driver/DriverDashboard";
 import CustomerRegister from "../Customer/Register";
 import DriverRegister from "../Driver/Register";
 import Login from "../Customer/Login";
+import AdminLogin from "../DispatchDashboard/login";
 
 export default class SideMenu extends Component {
   constructor(props) {
@@ -24,15 +26,15 @@ export default class SideMenu extends Component {
 
   handleMenuClick = (e, { name }) => {
     this.setState({ activeMenuItem: name });
-    console.log("selectedl", this.state.activeMenuItem);
+    console.log("selected", this.state.activeMenuItem);
   };
 
-  handleOrderNowClick = name => {
+  handleOrderNowClick = (e, { name }) => {
     this.setState({ selectedRestaurant: name });
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    console.log("REST", this.state.selectedRestaurant);
+    console.log("REST", prevProps, this.props);
   };
 
   render() {
@@ -128,14 +130,14 @@ export default class SideMenu extends Component {
         ) : null}
 
         {this.state.activeMenuItem === "Order Now" &&
-        this.state.selectedRestaurant === "" ? (
+        checkEmpty(this.state.selectedRestaurant) ? (
           <Grid.Column width={13}>
-            <OrderNow DisplayMenu={this.handleOrderNowClick} />
+            <OrderNow orderNowClick={this.handleOrderNowClick} />
           </Grid.Column>
         ) : null}
 
         {this.state.activeMenuItem === "Order Now" &&
-        this.state.selectedRestaurant !== "" ? (
+        !checkEmpty(this.state.selectedRestaurant) ? (
           <Grid.Column width={13}>
             <RestaurantMenu
               selectedRestaurant={this.state.selectedRestaurant}

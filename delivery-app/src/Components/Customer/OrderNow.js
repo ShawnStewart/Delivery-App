@@ -40,14 +40,6 @@ export default class OrderNow extends Component {
     };
   }
 
-  handleRestaurantClick = (e, { name }) => {
-    this.setState({ selectedRestaurant: name });
-  };
-
-  componentDidUpdate = (prevProps, prevState) => {
-    this.props.DisplayMenu(this.state.selectedRestaurant);
-  };
-
   render() {
     return (
       <Segment>
@@ -73,8 +65,7 @@ export default class OrderNow extends Component {
                     animated="vertical"
                     floated="right"
                     name={restaurant.name}
-                    onClick={this.handleRestaurantClick}
-                    content="Order Now!"
+                    onClick={this.props.orderNowClick}
                     color="green"
                   >
                     <Button.Content hidden>
@@ -85,7 +76,7 @@ export default class OrderNow extends Component {
 
                   <List.Header>
                     <h3>{restaurant.name}</h3>
-                    Delivery fee: $2.99 Minimum order: $8.99
+                    Delivery fee: $2.99
                     <br />
                     Minimum order: $8.99
                   </List.Header>
