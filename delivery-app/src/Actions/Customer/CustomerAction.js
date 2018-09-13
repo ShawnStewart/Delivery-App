@@ -1,6 +1,5 @@
-import { CUSTOMER_REGISTER_ERRORS } from "../Types";
+import { CUSTOMER_REGISTER_ERRORS, CUSTOMER_REGISTER_SUCCESS } from "../Types";
 import axios from "axios";
-// import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
 // Register User

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Segment, Icon, Button, Grid, Label, Form } from "semantic-ui-react";
-import { registerCustomer } from "../../Actions/AuthActions";
 
 export default class Register extends Component {
   constructor(props) {
@@ -32,11 +31,7 @@ export default class Register extends Component {
       password2: this.state.password2
     };
 
-<<<<<<< Updated upstream
     // this.props.registerCustomer(newCustomer, this.props.history);
-=======
-    this.props.registerCustomer(newCustomer, this.props.history);
->>>>>>> Stashed changes
   }
 
   onChange(e) {
