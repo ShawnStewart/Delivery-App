@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-  Segment,
-  Icon,
-  Button,
-  Modal,
-  Header,
-  Input,
-  Label
-} from "semantic-ui-react";
+import { Segment, Icon, Button, Modal, Header, Input } from "semantic-ui-react";
 export default class DriverDashboard extends Component {
   constructor(props) {
     super(props);

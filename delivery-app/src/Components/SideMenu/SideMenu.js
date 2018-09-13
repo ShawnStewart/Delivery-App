@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Menu, Segment, GridColumn } from "semantic-ui-react";
+import { Grid, Menu } from "semantic-ui-react";
 import checkEmpty from "./checkEmpty";
 
 // UI components
@@ -12,7 +12,7 @@ import DriverDashboard from "../Driver/DriverDashboard";
 import CustomerRegister from "../Customer/Register";
 import DriverRegister from "../Driver/Register";
 import Login from "../Customer/Login";
-import AdminLogin from "../DispatchDashboard/login";
+// import AdminLogin from "../DispatchDashboard/login";
 
 export default class SideMenu extends Component {
   constructor(props) {

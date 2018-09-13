@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Grid } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 
 // Components
 import SideMenu from "./Components/SideMenu/SideMenu";

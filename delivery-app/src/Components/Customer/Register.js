@@ -22,14 +22,14 @@ export default class Register extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    const newCustomer = {
-      firstname: this.state.firstname,
-      lastname: this.state.lastname,
-      phone: this.state.phone,
-      email: this.state.email,
-      password: this.state.password,
-      password2: this.state.password2
-    };
+    // const newCustomer = {
+    //   firstname: this.state.firstname,
+    //   lastname: this.state.lastname,
+    //   phone: this.state.phone,
+    //   email: this.state.email,
+    //   password: this.state.password,
+    //   password2: this.state.password2
+    // };
 
     // this.props.registerCustomer(newCustomer, this.props.history);
   }

@@ -49,7 +49,7 @@ export default class RestaurantMenu extends Component {
 
   CalculateTotal = () => {
     let total = 0;
-    this.cart.map((item, index) => {
+    this.cart.forEach(item => {
       total += item.price;
     });
     this.setState({ total: parseFloat(total).toFixed(2) });
