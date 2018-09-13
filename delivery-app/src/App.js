@@ -11,7 +11,10 @@ import Login from "./Components/Customer/Login";
 import OrderNow from "./Components/Customer/OrderNow";
 
 import DriverRegister from "./Components/Driver/Register";
-// import DriverLogin from "./Components/Driver/Login";
+import DriverLogin from "./Components/Customer/Login";
+import DriverDashboard from "./Components/Driver/DriverDashboard";
+import CurrentDelivery from "./Components/Driver/CurrentDelivery";
+import RestaurantMenu from "./Components/Customer/RestaurantMenu";
 
 // Styling
 import "semantic-ui-css/semantic.min.css";
@@ -27,8 +30,19 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/delivery" component={OrderNow} />
+              <Route exact path="/delivery/menu" component={RestaurantMenu} />
               <Route exact path="/driver/register" component={DriverRegister} />
-              {/* <Route exact path="/driver/login" component={DriverLogin} /> */}
+              <Route exact path="/driver/login" component={DriverLogin} />
+              <Route
+                exact
+                path="/driver/dashboard"
+                component={DriverDashboard}
+              />
+              <Route
+                exact
+                path="/driver/currentdelivery"
+                component={CurrentDelivery}
+              />
               <Route component={Default} />
             </Switch>
           </Container>

@@ -35,8 +35,14 @@ export default props => {
                 content="Login"
                 onClick={() => props.history.push("/driver/login")}
               />
-              <Dropdown.Item content="Dashboard" />
-              <Dropdown.Item content="Current Delivery" />
+              <Dropdown.Item
+                content="Dashboard"
+                onClick={() => props.history.push("/driver/dashboard")}
+              />
+              <Dropdown.Item
+                content="Current Delivery"
+                onClick={() => props.history.push("/driver/currentdelivery")}
+              />
             </Dropdown.Menu>
           </Dropdown>
         </Menu.Menu>

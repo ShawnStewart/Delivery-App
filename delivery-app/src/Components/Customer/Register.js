@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Segment, Icon, Button, Grid, Label, Form } from "semantic-ui-react";
+import { registerCustomer } from "../../Actions/Customer/CustomerAction";
 
 export default class Register extends Component {
   constructor(props) {
@@ -22,16 +23,16 @@ export default class Register extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    // const newCustomer = {
-    //   firstname: this.state.firstname,
-    //   lastname: this.state.lastname,
-    //   phone: this.state.phone,
-    //   email: this.state.email,
-    //   password: this.state.password,
-    //   password2: this.state.password2
-    // };
+    const newCustomer = {
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      phone: this.state.phone,
+      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2
+    };
 
-    // this.props.registerCustomer(newCustomer, this.props.history);
+    this.props.registerCustomer(newCustomer, this.props.history);
   }
 
   onChange(e) {
@@ -102,6 +103,21 @@ export default class Register extends Component {
                     placeholder="Phone..."
                     name="phone"
                     value={this.state.phone}
+                    onChange={this.onChange}
+                  />
+                </Segment>
+                <Segment>
+                  <Label
+                    horizontal
+                    color="blue"
+                    size="large"
+                    content="Birthday"
+                  />
+                  <Form.Input
+                    type="date"
+                    placeholder="Birthday..."
+                    name="birthday"
+                    value={this.state.birthday}
                     onChange={this.onChange}
                   />
                 </Segment>
