@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Grid, Menu, Dropdown } from "semantic-ui-react";
+import { Container } from "semantic-ui-react";
 
 // Components
 import TopMenu from "./Components/TopMenu/TopMenu";
