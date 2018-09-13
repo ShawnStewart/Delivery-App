@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Container } from "semantic-ui-react";
+import { Container, Grid, Menu, Dropdown } from "semantic-ui-react";
 
 // Components
-import SideMenu from "./Components/SideMenu/SideMenu";
+import TopMenu from "./Components/TopMenu/TopMenu";
 
 // Styling
 import "semantic-ui-css/semantic.min.css";
@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <Container>
-        <SideMenu />
+        <TopMenu />
       </Container>
     );
   }
