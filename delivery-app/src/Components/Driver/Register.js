@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Segment, Icon, Button, Grid, Label, Form } from "semantic-ui-react";
-import { registerCustomer } from "../../Actions/AuthActions";
 
 export default class Register extends Component {
   constructor(props) {
