@@ -32,7 +32,11 @@ export default class Register extends Component {
       password2: this.state.password2
     };
 
+<<<<<<< Updated upstream
     // this.props.registerCustomer(newCustomer, this.props.history);
+=======
+    this.props.registerCustomer(newCustomer, this.props.history);
+>>>>>>> Stashed changes
   }
 
   onChange(e) {
