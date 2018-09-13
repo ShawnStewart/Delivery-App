@@ -57,7 +57,7 @@ export default class Register extends Component {
           color="blue"
           inverted
         >
-          <Icon className="black" name="user circle" size="massive" />
+          <Icon className="black" name="car" size="massive" />
         </Segment>
         <Segment padded className="ui center aligned grid">
           <h2>Create Account</h2>
