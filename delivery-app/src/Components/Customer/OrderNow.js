@@ -65,7 +65,7 @@ export default class OrderNow extends Component {
                     animated="vertical"
                     floated="right"
                     name={restaurant.name}
-                    onClick={this.props.orderNowClick}
+                    onClick={() => this.props.history.push("/delivery/menu")}
                     color="green"
                   >
                     <Button.Content hidden>
