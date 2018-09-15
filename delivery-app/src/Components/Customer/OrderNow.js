@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Segment, Button, Icon, List } from "semantic-ui-react";
+import { RESTAURANT_SELECTED } from "../../Actions/Types";
+import { connect } from "react-redux";
 import "./Customer.css";
 
 export default class OrderNow extends Component {
@@ -38,6 +40,16 @@ export default class OrderNow extends Component {
         }
       ]
     };
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(e) {
+    e.preventDefault();
+    this.setState({ selectedRestaurant: e.target.value });
+    console.log("state", this.state);
+    const selectedRestaurant = this.state.selectedRestaurant;
+    // dispatch({ type: RESTAURANT_SELECTED, payload: selectedRestaurant });
+    this.props.history.push("/delivery/menu");
   }
 
   render() {
@@ -64,8 +76,8 @@ export default class OrderNow extends Component {
                   <Button
                     animated="vertical"
                     floated="right"
-                    name={restaurant.name}
-                    onClick={() => this.props.history.push("/delivery/menu")}
+                    value={restaurant.name}
+                    onClick={this.onClick}
                     color="green"
                   >
                     <Button.Content hidden>
