@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Segment, Icon, Button, Grid, Label, Form } from "semantic-ui-react";
+import { Segment, Icon, Button, Label, Form } from "semantic-ui-react";
 
 export default class Login extends Component {
   constructor(props) {

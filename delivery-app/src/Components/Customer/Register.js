@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Segment, Icon, Button, Grid, Label, Form } from "semantic-ui-react";
+<<<<<<< HEAD
+=======
+import { registerCustomer } from "../../Actions/Customer/CustomerAction";
+>>>>>>> 167e6a2bc3d91f662a09b0cb98b531bc724a926a
 
 export default class Register extends Component {
   constructor(props) {
@@ -31,7 +35,7 @@ export default class Register extends Component {
       password2: this.state.password2
     };
 
-    // this.props.registerCustomer(newCustomer, this.props.history);
+    this.props.registerCustomer(newCustomer, this.props.history);
   }
 
   onChange(e) {
@@ -102,6 +106,21 @@ export default class Register extends Component {
                     placeholder="Phone..."
                     name="phone"
                     value={this.state.phone}
+                    onChange={this.onChange}
+                  />
+                </Segment>
+                <Segment>
+                  <Label
+                    horizontal
+                    color="blue"
+                    size="large"
+                    content="Birthday"
+                  />
+                  <Form.Input
+                    type="date"
+                    placeholder="Birthday..."
+                    name="birthday"
+                    value={this.state.birthday}
                     onChange={this.onChange}
                   />
                 </Segment>

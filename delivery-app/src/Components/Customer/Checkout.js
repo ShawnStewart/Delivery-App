@@ -104,7 +104,6 @@ export default class Checkout extends Component {
             <Segment color="black">
               <List divided relaxed>
                 {this.state.cartItems.map((item, index) => {
-                  let total = null;
                   return (
                     <List.Item key={index}>
                       <List.Header>{item.name}</List.Header>

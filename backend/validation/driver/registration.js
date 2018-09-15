@@ -2,6 +2,7 @@ const Validator = require("validator");
 const checkEmpty = require("../checkEmpty");
 
 module.exports = function validateRegisterInput(data) {
+  const currentDate = new Date();
   let errors = {};
 
   data.firstname = !checkEmpty(data.firstname) ? data.firstname : "";
@@ -57,7 +58,16 @@ module.exports = function validateRegisterInput(data) {
     errors.birthday = "Birthday is required";
   } else if (!Validator.isLength(data.birthday, { min: 10, max: 10 })) {
     errors.birthday = "Birthday is invalid";
-  } else if (!Validator.isBefore(data.birthday, toString(Date.now()))) {
+  } else if (
+    !Validator.isBefore(
+      data.birthday,
+      [
+        currentDate.getFullYear() - 21,
+        currentDate.getMonth() + 1,
+        currentDate.getDate()
+      ].join("-")
+    )
+  ) {
     errors.birthday = "You must be at least 21 years old to register";
   }
 

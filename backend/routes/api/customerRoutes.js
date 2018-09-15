@@ -55,45 +55,51 @@ router.post("/register", (req, res) => {
 // @access  Private
 router.post("/login", (req, res) => {
   const { errors, isValid } = validateLogin(req.body);
+
   // Check Validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
+  if (!isValid) return res.status(400).json(errors);
 
   const { password, email } = req.body;
 
   // Find user by email
-  Customer.findOne({ email }).then(user => {
-    // Check for user
-    if (!user) {
-      errors.email = "User not found";
-      return res.status(404).json(errors);
-    }
-
-    // Check Password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        // User matched
-        const payload = { id: user.id, name: user.name }; // Create JWT payload
-
-        // Sign Token
-        jwt.sign(
-          payload,
-          process.env.ACCESS_KEY,
-          { expiresIn: 3600 },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            });
-          }
-        );
-      } else {
-        errors.password = "Password incorrect";
+  Customer.findOne({ email })
+    .then(user => {
+      // Check for user
+      if (!user) {
+        errors.email = "Invalid Credentials";
         return res.status(400).json(errors);
       }
-    });
-  });
+
+      // Check Password
+      bcrypt.compare(password, user.password).then(isMatch => {
+        if (isMatch) {
+          // User matched
+          const payload = {
+            type: 1,
+            id: user._id,
+            firstname: user.firstname,
+            lastname: user.lastname
+          }; // Create JWT payload
+
+          // Sign Token
+          jwt.sign(
+            payload,
+            process.env.ACCESS_KEY,
+            { expiresIn: "1h" },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token
+              });
+            }
+          );
+        } else {
+          errors.email = "Invalid Credentials";
+          return res.status(400).json(errors);
+        }
+      });
+    })
+    .catch(err => res.status(404).json({ message: err }));
 });
 
 module.exports = router;
