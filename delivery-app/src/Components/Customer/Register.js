@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { Segment, Icon, Button, Grid, Label, Form } from "semantic-ui-react";
+import { connect } from "react-redux";
+
+// actions
 import { registerCustomer } from "../../Actions/Customer/CustomerAction";
 
-export default class Register extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
 
@@ -177,3 +180,14 @@ export default class Register extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    registerErrors: state.registerErrors
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { registerCustomer }
+)(Register);
