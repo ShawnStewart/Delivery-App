@@ -1,10 +1,38 @@
 import React, { Component } from "react";
-import { Segment, Icon, Button, Modal, Header, Input } from "semantic-ui-react";
+import {
+  Segment,
+  Icon,
+  Button,
+  Modal,
+  Header,
+  Form,
+  Container
+} from "semantic-ui-react";
 export default class AdminDashboard extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      Restaurant: {
+        name: "",
+        address: {
+          street: "",
+          unit: "",
+          city: "",
+          state: "",
+          zip: ""
+        },
+        phone: "",
+        minimum: "",
+        menuItems: [
+          {
+            name: "",
+            price: "",
+            desc: ""
+          }
+        ]
+      }
+    };
   }
 
   render() {
@@ -42,32 +70,68 @@ export default class AdminDashboard extends Component {
           <Segment>
             <Modal
               trigger={
-                <Button icon="cog" content="Edit profile" color="blue" />
+                <Button icon="cog" content="Add restaurant" color="blue" />
               }
               closeIcon
             >
-              <Modal.Header>Add restaurant</Modal.Header>
+              <Modal.Header as="h1">Add restaurant</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Input
-                    label="Name: "
-                    type="text"
-                    placeholder={this.state.name}
-                  />{" "}
-                  <br />
-                  <Input
-                    label="Phone: "
-                    type="text"
-                    placeholder={this.state.phone}
-                  />{" "}
-                  <br />
-                  <Input
-                    label="Email: "
-                    type="text"
-                    placeholder={this.state.email}
-                  />{" "}
-                  <br />
-                  <br />
+                  <Form onSubmit={this.onSubmit}>
+                    <Container>
+                      <h3>Restaurant information</h3>
+                      <Form.Input
+                        placeholder="Name"
+                        label="Name"
+                        type="text"
+                        value={this.state.name}
+                      />
+                      <Form.Input
+                        placeholder="Street"
+                        label="Street: "
+                        type="text"
+                        value={this.state.street}
+                      />
+                      <Form.Input
+                        placeholder="Unit"
+                        label="Unit: "
+                        type="text"
+                        value={this.state.unit}
+                      />
+                      <Form.Input
+                        placeholder="City"
+                        label="City: "
+                        type="text"
+                        value={this.state.city}
+                      />
+                      <Form.Input
+                        placeholder="State"
+                        label="State: "
+                        type="text"
+                        value={this.state.state}
+                      />
+                      <Form.Input
+                        placeholder="Zip code"
+                        label="Zip code: "
+                        type="Number"
+                        value={this.state.zip}
+                      />
+                      <Form.Input
+                        placeholder="Phone number"
+                        label="Phone number"
+                        type="Number"
+                        value={this.state.phone}
+                      />
+                      <Form.Input
+                        placeholder="Minimum delivery"
+                        label="Minimum delivery"
+                        type="Number"
+                        value={this.state.minimum}
+                      />
+                    </Container>
+                    <br />
+                    <br />
+                  </Form>
                 </Modal.Description>
                 <Button icon="check" color="green" content="Save" />
                 <Button icon="close" color="red" content="Cancel" />
@@ -75,11 +139,11 @@ export default class AdminDashboard extends Component {
             </Modal>
             <Modal
               trigger={
-                <Button icon="file" content="Driver documents" color="green" />
+                <Button icon="file" content="Manage restaurant" color="green" />
               }
               closeIcon
             >
-              <Modal.Header>Driver Documents</Modal.Header>
+              <Modal.Header>Manage restaurant</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
                   <Header>Driver Agreement</Header>
