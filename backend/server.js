@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const cors = require("cors");
 
 // import routes
 const adminRoutes = require("./routes/api/adminRoutes");
@@ -11,6 +12,7 @@ const driverRoutes = require("./routes/api/driverRoutes");
 // middleware
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // connect to MongoDB
 const db = process.env.MONGO_URI;
@@ -24,9 +26,9 @@ mongoose
   .catch(err => console.log(err));
 
 // connect routes
-app.use("/api/admins/", adminRoutes);
-app.use("/api/customers/", customerRoutes);
-app.use("/api/drivers/", driverRoutes);
+app.use("/api/admins", adminRoutes);
+app.use("/api/customers", customerRoutes);
+app.use("/api/drivers", driverRoutes);
 
 const port = process.env.PORT || 4000;
 

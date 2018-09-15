@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Segment, Icon, Button, Label, Form } from "semantic-ui-react";
+import { connect } from "react-redux";
 
-export default class Login extends Component {
+// action
+import { loginCustomer } from "../../Actions/Customer/CustomerAction";
+
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -17,7 +21,11 @@ export default class Login extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    // Check credentials
+    const userData = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    this.props.loginCustomer(userData);
   }
 
   onChange(e) {
@@ -75,3 +83,14 @@ export default class Login extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    loginErrors: state.loginErrors
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { loginCustomer }
+)(Login);

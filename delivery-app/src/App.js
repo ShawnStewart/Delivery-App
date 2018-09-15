@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Components
 import { Container } from "semantic-ui-react";
-import Default from "./Components/404";
+import LandingPage from "./Components/LandingPage/LandingPage";
 import TopMenu from "./Components/TopMenu/TopMenu";
+import Default from "./Components/404";
 
 import Register from "./Components/Customer/Register";
 import Login from "./Components/Customer/Login";
@@ -27,6 +28,7 @@ class App extends Component {
           <Route path="/" component={TopMenu} />
           <Container>
             <Switch>
+              <Route exact path="/" component={LandingPage} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/delivery" component={OrderNow} />
