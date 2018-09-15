@@ -7,7 +7,8 @@ import {
 
 const initialState = {
   registerErrors: {},
-  loginErrors: {}
+  loginErrors: {},
+  restaurantSelected: {}
 };
 
 export default function(state = initialState, action) {

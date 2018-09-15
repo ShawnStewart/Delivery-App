@@ -16,6 +16,7 @@ import DriverLogin from "./Components/Customer/Login";
 import DriverDashboard from "./Components/Driver/DriverDashboard";
 import CurrentDelivery from "./Components/Driver/CurrentDelivery";
 import RestaurantMenu from "./Components/Customer/RestaurantMenu";
+import AdminLogin from "./Components/Admin/Login";
 
 // Styling
 import "semantic-ui-css/semantic.min.css";
@@ -35,6 +36,7 @@ class App extends Component {
               <Route exact path="/delivery/menu" component={RestaurantMenu} />
               <Route exact path="/driver/register" component={DriverRegister} />
               <Route exact path="/driver/login" component={DriverLogin} />
+              <Route exact path="/admin/login" component={AdminLogin} />
               <Route
                 exact
                 path="/driver/dashboard"

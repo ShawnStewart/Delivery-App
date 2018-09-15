@@ -29,6 +29,7 @@ export const loginCustomer = (userData, history) => dispatch => {
     .then(res => {
       dispatch({ type: CUSTOMER_LOGIN_SUCCESS });
       localStorage.setItem("CustomerToken", res.data.token);
+      history.push("/delivery");
     })
     .catch(err => {
       dispatch({
