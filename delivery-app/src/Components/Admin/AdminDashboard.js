@@ -6,33 +6,61 @@ import {
   Modal,
   Header,
   Form,
-  Container
+  Container,
+  Grid
 } from "semantic-ui-react";
-export default class AdminDashboard extends Component {
+
+// action
+import { addRestaurant } from "../../Actions/Admin/AdminAction";
+import { connect } from "react-redux";
+
+class AdminDashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      Restaurant: {
-        name: "",
-        address: {
-          street: "",
-          unit: "",
-          city: "",
-          state: "",
-          zip: ""
-        },
-        phone: "",
-        minimum: "",
-        menuItems: [
-          {
-            name: "",
-            price: "",
-            desc: ""
-          }
-        ]
-      }
+      name: "",
+      street: "",
+      unit: "",
+      city: "",
+      state: "",
+      zip: "",
+      phone: "",
+      minimum: "",
+      menuItems: [
+        {
+          name: "",
+          price: "",
+          desc: ""
+        }
+      ]
     };
+
+    this.addRestaurantSubmit = this.addRestaurantSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+    console.log("state", this.state);
+  }
+
+  addRestaurantSubmit(e) {
+    e.preventDefault();
+
+    const restaurantData = {
+      name: this.state.name,
+      street: this.state.street,
+      unit: this.state.unit,
+      city: this.state.city,
+      state: this.state.state,
+      zip: this.state.zip,
+      phone: this.state.phone,
+      minimum: this.state.minimum
+    };
+
+    console.log("data", restaurantData);
+    this.props.addRestaurant(restaurantData, this.props.history);
   }
 
   render() {
@@ -70,93 +98,120 @@ export default class AdminDashboard extends Component {
           <Segment>
             <Modal
               trigger={
-                <Button icon="cog" content="Add restaurant" color="blue" />
-              }
-              closeIcon
-            >
-              <Modal.Header as="h1">Add restaurant</Modal.Header>
-              <Modal.Content>
-                <Modal.Description>
-                  <Form onSubmit={this.onSubmit}>
-                    <Container>
-                      <h3>Restaurant information</h3>
-                      <Form.Input
-                        placeholder="Name"
-                        label="Name"
-                        type="text"
-                        value={this.state.name}
-                      />
-                      <Form.Input
-                        placeholder="Street"
-                        label="Street: "
-                        type="text"
-                        value={this.state.street}
-                      />
-                      <Form.Input
-                        placeholder="Unit"
-                        label="Unit: "
-                        type="text"
-                        value={this.state.unit}
-                      />
-                      <Form.Input
-                        placeholder="City"
-                        label="City: "
-                        type="text"
-                        value={this.state.city}
-                      />
-                      <Form.Input
-                        placeholder="State"
-                        label="State: "
-                        type="text"
-                        value={this.state.state}
-                      />
-                      <Form.Input
-                        placeholder="Zip code"
-                        label="Zip code: "
-                        type="Number"
-                        value={this.state.zip}
-                      />
-                      <Form.Input
-                        placeholder="Phone number"
-                        label="Phone number"
-                        type="Number"
-                        value={this.state.phone}
-                      />
-                      <Form.Input
-                        placeholder="Minimum delivery"
-                        label="Minimum delivery"
-                        type="Number"
-                        value={this.state.minimum}
-                      />
-                    </Container>
-                    <br />
-                    <br />
-                  </Form>
-                </Modal.Description>
-                <Button icon="check" color="green" content="Save" />
-                <Button icon="close" color="red" content="Cancel" />
-              </Modal.Content>
-            </Modal>
-            <Modal
-              trigger={
-                <Button icon="file" content="Manage restaurant" color="green" />
+                <Button
+                  icon="file"
+                  content="Manage restaurants"
+                  color="green"
+                />
               }
               closeIcon
             >
               <Modal.Header>Manage restaurant</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Header>Driver Agreement</Header>
-                  <p>Review and accept driver agreement</p>
-                  <Button icon="file" content="View driver agreement" />
-                  <Header>Proof of Insurance</Header>
-                  <p>Upload a photo of your insurance information</p>
-                  <Button icon="file" content="Upload file" />
+                  <Header>Select a restaurant to edit</Header>
                 </Modal.Description>
                 <br />
                 <br />
                 <Button icon="check" color="green" content="Save" />
                 <Button icon="close" color="red" content="Cancel" />
+                <Modal
+                  trigger={
+                    <Button icon="cog" content="Add restaurant" color="blue" />
+                  }
+                  closeIcon
+                >
+                  <Modal.Header as="h1">Add restaurant</Modal.Header>
+                  <Modal.Content>
+                    <Modal.Description>
+                      <Form onSubmit={this.addRestaurantSubmit}>
+                        <Container>
+                          <h3>Restaurant information</h3>
+                          <Grid>
+                            <Grid.Column width={8}>
+                              <Form.Input
+                                placeholder="Name"
+                                label="Name"
+                                type="text"
+                                name="name"
+                                value={this.state.name}
+                                onChange={this.onChange}
+                              />
+                              <Form.Input
+                                placeholder="Street"
+                                label="Street: "
+                                type="text"
+                                name="street"
+                                value={this.state.street}
+                                onChange={this.onChange}
+                              />
+                              <Form.Input
+                                placeholder="Unit"
+                                label="Unit: "
+                                type="text"
+                                name="unit"
+                                value={this.state.unit}
+                                onChange={this.onChange}
+                              />
+                              <Form.Input
+                                placeholder="City"
+                                label="City: "
+                                type="text"
+                                name="city"
+                                value={this.state.city}
+                                onChange={this.onChange}
+                              />
+                            </Grid.Column>
+                            <Grid.Column width={8}>
+                              <Form.Input
+                                placeholder="State"
+                                label="State: "
+                                type="text"
+                                name="state"
+                                value={this.state.state}
+                                onChange={this.onChange}
+                              />
+                              <Form.Input
+                                placeholder="Zip code"
+                                label="Zip code: "
+                                type="Number"
+                                name="zip"
+                                value={this.state.zip}
+                                onChange={this.onChange}
+                              />
+                              <Form.Input
+                                placeholder="Phone number"
+                                label="Phone number"
+                                type="Number"
+                                name="phone"
+                                value={this.state.phone}
+                                onChange={this.onChange}
+                              />
+                              <Form.Input
+                                placeholder="Minimum delivery"
+                                label="Minimum delivery"
+                                type="Number"
+                                name="minimum"
+                                value={this.state.minimum}
+                                onChange={this.onChange}
+                              />
+                            </Grid.Column>
+                          </Grid>
+                        </Container>
+                        <br />
+                        <br />
+                        <Form.Field
+                          control={Button}
+                          icon="check"
+                          color="green"
+                          content="Save"
+                        />
+                      </Form>
+                    </Modal.Description>
+
+                    <Button icon="close" color="red" content="Cancel" />
+                  </Modal.Content>
+                </Modal>
               </Modal.Content>
             </Modal>
           </Segment>
@@ -165,3 +220,14 @@ export default class AdminDashboard extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    addRestaurantErrors: state.addRestaurantErrors
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { addRestaurant }
+)(AdminDashboard);

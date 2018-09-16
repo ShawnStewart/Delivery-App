@@ -7,12 +7,30 @@ const RestaurantSchema = new Schema({
     type: String,
     required: true
   },
-  address: {
-    street: String,
-    unit: String,
-    city: String,
-    state: String,
-    zip: Number
+  street: {
+    type: String,
+    required: true
+  },
+  unit: {
+    type: String,
+    required: true
+  },
+  city: {
+    type: String,
+    required: true
+  },
+  state: {
+    type: String,
+    required: true
+  },
+  zip: {
+    type: Number,
+    required: true
+  },
+
+  phone: {
+    type: Number,
+    required: true
   },
   minimum: {
     type: Number,
